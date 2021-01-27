@@ -1,7 +1,8 @@
 import './App.css';
 import styled from 'styled-components';
 import React, { Component } from 'react';
-import Person from './Person/Person';
+import Person from '../Components/Persons/Person/Person';
+import Persons from '../Components/Persons/Persons'
 
 const StyledButton = styled.button`
 background-color: ${props => props.alt ? 'red' : 'green'};
@@ -13,6 +14,7 @@ cursor: pointer;
 &:hover {
   background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
   color: black;
+}
 `
 
 class App extends Component {
@@ -71,6 +73,9 @@ render () {
       if (this.state.showPersons) {
         persons = (
           <div>
+            <Persons persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}/>
             {this.state.persons.map((person, index) =>{
               return (
               <Person 
@@ -79,7 +84,7 @@ render () {
               age={person.age} 
               key={person.id}
               changed={(event) => this.nameChangedHandler(event, person.id)} />
-              );
+              )
             })}
         </div>
         )
